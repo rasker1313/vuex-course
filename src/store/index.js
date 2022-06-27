@@ -1,8 +1,28 @@
-import Vuex from 'vuex'
-import Vue from 'vue'
+import { createStore } from 'vuex'
 
-Vue.use(Vuex)
+export const store = createStore({
+    state: { // data
+        products: []
+    },
 
-new Vue.Store({
+    getters:{ // computed properties
+        productsCount () {
 
+        }
+    },
+
+    actions: {
+        fetchProducts () {
+            // make the call
+            // run setProducts mutation
+        }
+    },
+
+    mutations: {
+        setProducts (state, products) {
+            // update products
+            state.products = products
+        }
+    }
 })
+
