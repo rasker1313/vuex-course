@@ -5,9 +5,9 @@ export const store = createStore({
         products: []
     },
 
-    getters:{ // computed properties
-        productsCount () {
-
+    getters: { // computed properties
+        availableProducts(state){
+            return state.products.filter(product => product.inventory > 0)
         }
     },
 
