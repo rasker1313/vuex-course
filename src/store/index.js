@@ -5,7 +5,8 @@ export const store = createStore({
     state: { // data
         products: [],
         // {id, quantity}
-        cart: []
+        cart: [],
+        checkoutStatus: null
     },
 
     getters: { // computed properties
@@ -57,9 +58,20 @@ export const store = createStore({
                 }
                 context.commit('decrementProductInventory', product)
 
-            } else {
-                //show out of stock method
             }
+        },
+
+        checkout({state, commit}){
+            shop.buyProducts(
+                state.cart,
+                () => {
+                    commit('emptyCart')
+                    commit('setCheckoutStatus', 'success')
+                },
+                () => {
+                    commit('setCheckoutStatus', 'fail')
+                }
+            )
         }
     },
 
@@ -81,6 +93,14 @@ export const store = createStore({
 
         decrementProductInventory(state, cartItem){
             cartItem.inventory--
+        },
+
+        setCheckoutStatus(state, status){
+            state.checkoutStatus = status
+        },
+
+        emptyCart(state){
+            state.cart = []
         }
     }
 })

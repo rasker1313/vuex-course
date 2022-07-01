@@ -7,6 +7,8 @@
       </li>
     </ul>
     <p>Total: {{$currency(total)}}</p>
+    <button @click="this.$store.dispatch('checkout')">Checkout</button>
+    <p v-if="this.$store.state.checkoutStatus">{{$store.state.checkoutStatus}}</p>
   </div>
 </template>
 
